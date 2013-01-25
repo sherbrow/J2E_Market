@@ -49,26 +49,29 @@ public class FrontServlet extends HttpServlet {
         
         List<String> parameterNamesList = new ArrayList<String>();
         
-        Pattern urlPattern = Pattern.compile("/([a-zA-Z]+)/");
+        Pattern urlPattern = Pattern.compile("([a-zA-Z]+)");
         parameterNamesList.add("controller");
         parameterNamesList.add("action");
         
         Matcher urlMatcher = urlPattern.matcher(pathInfo);
         urlMatcher.matches();
-        
-        int supportedParametersCount =
-            urlMatcher.groupCount() < parameterNamesList.size()?
-                urlMatcher.groupCount()
-                :parameterNamesList.size();
-        
-        for(int index = 0;index < supportedParametersCount; ++index) {
-            String parameterValue = urlMatcher.group(index);
-            String parameterName = parameterNamesList.get(index);
-            router.put(parameterName, parameterValue);
+        if(urlMatcher.find()) {
+            int supportedParametersCount =
+                urlMatcher.groupCount() < parameterNamesList.size()?
+                    urlMatcher.groupCount()
+                    :parameterNamesList.size();
+
+            for(int index = 0;index < supportedParametersCount; ++index) {
+                String parameterValue = urlMatcher.group(index);
+                String parameterName = parameterNamesList.get(index);
+                router.put(parameterName, parameterValue);
+            }
         }
         
         MvcController controller;
         String controllerName = router.get("controller");
+        controllerName = controllerName.toUpperCase().charAt(0) + controllerName.toLowerCase().substring(1);
+        controllerName = "web.controller."+controllerName+"Controller";
         String actionName = router.get("action");
         if(actionName == null || actionName.isEmpty()) actionName = "index";
         // TODO Set defaults if not found
@@ -76,8 +79,11 @@ public class FrontServlet extends HttpServlet {
         try {
                 controller = (MvcController)(Class.forName(controllerName).newInstance());
                 actionResult = controller.call(actionName, request, response);
+        } catch (ClassNotFoundException e) {
+                actionResult = new ActionResult("404");
         } catch (Exception e) {
                 e.printStackTrace();
+                actionResult = new ActionResult(e.getMessage());
         }
         
         switch(actionResult.getType()) {

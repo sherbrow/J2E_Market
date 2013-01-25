@@ -5,12 +5,13 @@
 package web.controller;
 
 import web.ActionResult;
+import web.MvcController;
 
 /**
  *
  * @author Sherbrow
  */
-public class TestController {
+public class TestController extends MvcController {
     
     public ActionResult index() {
         ActionResult actionResult = new ActionResult("Hello world from the Test Controller !");
