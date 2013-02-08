@@ -14,7 +14,12 @@ import web.MvcController;
 public class TestController extends MvcController {
     
     public ActionResult index() {
-        ActionResult actionResult = new ActionResult("Hello world from the Test Controller !");
+        ActionResult actionResult = new ActionResult("index");
+        return actionResult;
+    }
+    
+    public ActionResult hello() {
+        ActionResult actionResult = new ActionResult("Hello world from the Test Controller !", ActionResult.TYPE_STRING);
         return actionResult;
     }
     

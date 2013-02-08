@@ -5,7 +5,7 @@
 <facelet-taglib>
     <namespace>mvc.facelets</namespace>
     <tag>
-	<tag-name>route</tag-name>
-	<source>route.xhtml</source>
+        <tag-name>a</tag-name>
+        <source>a.xhtml</source>
     </tag>
 </facelet-taglib>

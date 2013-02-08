@@ -1,19 +1,86 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
-
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:mvc="mvc.facelets">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./assets/css/default.css" rel="stylesheet" type="text/css" />
+        <meta charset="utf-8" />
         <title>J2E_Market</title>
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Le styles -->
+        <link href="#{request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
+        <style type="text/css">
+            body {
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+            .sidebar-nav {
+                padding: 9px 0;
+            }
+            a.brand:hover { background-color: inherit!important; }
+        </style>
+        <link href="#{request.contextPath}/assets/css/bootstrap-responsive.css" rel="stylesheet" />
+
+        <link href="#{request.contextPath}/assets/ico/favicon.png"  rel="shortcut icon" />
+
+
         <ui:insert name="head"></ui:insert>
     </h:head>
 
     <h:body>
-        <ui:insert name="main"></ui:insert>
-    </h:body>
 
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <mvc:a href="/" class="brand" text="J2E_Market" />
+                    <div class="nav-collapse collapse">
+                        <p class="navbar-text pull-right">
+                            <!-- Logged in as <a href="#" class="navbar-link">Username</a> -->
+                        </p>
+                        <ul class="nav">
+                            <ui:include src="menu.xhtml" />
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="well sidebar-nav">
+                        <ui:insert name="submenu"></ui:insert>
+                        <ul class="nav nav-list">
+                            <li class="nav-header">J2E_Market</li>
+                            <ui:include src="menu.xhtml" />
+                        </ul>
+                    </div><!--/.well -->
+                </div><!--/span-->
+                <div class="span9">
+                    <ui:insert name="main"></ui:insert>
+                </div><!--/span-->
+            </div><!--/row-->
+
+            <hr />
+
+            <footer>
+                <p></p>
+            </footer>
+
+        </div><!--/.fluid-container-->
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="#{request.contextPath}/assets/js/jquery.js"></script>
+        <script src="#{request.contextPath}/assets/js/bootstrap.min.js"></script>
+
+    </h:body>
 </html>

@@ -9,13 +9,16 @@
     <body>
 
         <ui:composition template="/jsf/template.xhtml">
-
-            <ui:define name="head">
-                <h:outputScript name="js/script.js" />
+            <ui:define name="submenu">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Catalogue</li>
+                    <ui:include src="menu.xhtml" />
+                </ul>
             </ui:define>
+            
             <ui:define name="main">
+                Plop
             </ui:define>
-
         </ui:composition>
 
     </body>

@@ -4,6 +4,7 @@
  */
 package web.controller;
 
+import java.util.HashMap;
 import web.ActionResult;
 import web.MvcController;
 
@@ -13,9 +14,12 @@ import web.MvcController;
  */
 public class CatalogueController extends MvcController {
     
-    public ActionResult add() {
+    public ActionResult index() {
+        HashMap<String, Object> viewBag = new HashMap<String, Object>();
         
-        ActionResult actionResult = new ActionResult("Hello world from the Catalogue Controller !");
+        viewBag.put("message", "Hello world from the Catalogue Controller !");
+        
+        ActionResult actionResult = new ActionResult("catalogue/index", viewBag);
         return actionResult;
     }
     

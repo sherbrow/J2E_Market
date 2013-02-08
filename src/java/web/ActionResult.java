@@ -4,6 +4,9 @@
  */
 package web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Sherbrow
@@ -11,16 +14,30 @@ package web;
 public class ActionResult {
 
     public ActionResult(Object _result) {
-        this(_result, TYPE_STRING);
+        this(_result, TYPE_JSF, null);
+    }
+    public ActionResult(Object _result, Map<String, Object> viewBag) {
+        this(_result, TYPE_JSF, viewBag);
     }
     public ActionResult(Object _result, int _type) {
+        this(_result, _type, null);
+    }
+    public ActionResult(Object _result, int _type, Map<String, Object> viewBag) {
         this._type = _type;
         this._result = _result;
+        if(viewBag != null) {
+            this._viewBag = new HashMap<String, Object>(viewBag);
+        }
+        else {
+            this._viewBag = new HashMap<String, Object>();
+        }
     }
     
     private int _type;
     private Exception _error;
     private Object _result;
+    protected Map<String, Object> _viewBag = null;
+
 
     /**
      * @return the _type
@@ -81,6 +98,10 @@ public class ActionResult {
      */
     public void setResult(Object result) {
         this._result = result;
+    }
+    
+    public Map<String, Object> getViewBag() {
+        return _viewBag;
     }
     
 }

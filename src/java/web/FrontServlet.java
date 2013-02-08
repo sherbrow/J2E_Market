@@ -104,6 +104,9 @@ public class FrontServlet extends HttpServlet {
             }
         }
         
+        // Pass the controller values to the view
+        request.setAttribute("viewBag", actionResult.getViewBag());
+        
         switch(actionResult.getType() & ActionResult.MASK_RENDERTYPE) {
             case ActionResult.TYPE_STRING:
                 try {
