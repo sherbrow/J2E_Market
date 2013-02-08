@@ -86,7 +86,25 @@ public class FrontServlet extends HttpServlet {
                 actionResult = new ActionResult(e.getMessage());
         }
         
-        switch(actionResult.getType()) {
+        if((actionResult.getType() & ActionResult.MASK_HTTPERROR) != 0) {
+            switch(actionResult.getType() & ActionResult.MASK_HTTPERROR) {
+                case ActionResult.HTTP_401:
+                    response.setStatus(401);
+                    break;
+                case ActionResult.HTTP_403:
+                    response.setStatus(403);
+                    break;
+                case ActionResult.HTTP_404:
+                    response.setStatus(404);
+                    break;
+                case ActionResult.HTTP_500:
+                default:
+                    response.setStatus(500);
+                    break;
+            }
+        }
+        
+        switch(actionResult.getType() & ActionResult.MASK_RENDERTYPE) {
             case ActionResult.TYPE_STRING:
                 try {
                     ServletOutputStream outputStream = response.getOutputStream();

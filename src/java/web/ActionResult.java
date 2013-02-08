@@ -38,6 +38,13 @@ public class ActionResult {
 
 
     /**
+     * @param type the _type to set
+     */
+    public void addType(int type) {
+        this._type = type + this._type;
+    }
+
+    /**
      * @return the _error
      */
     public Exception getError() {
@@ -54,6 +61,13 @@ public class ActionResult {
     public static final int  TYPE_JSP = 1;
     public static final int TYPE_STRING = 2;
     public static final int TYPE_JSF = 4;
+    public static final int MASK_RENDERTYPE = 31;
+    public static final int HTTP_401 = 32;
+    public static final int HTTP_403 = 64;
+    public static final int HTTP_404 = 128;
+    public static final int HTTP_500 = 256;
+    public static final int MASK_HTTPERROR = 481;
+    public static final int TYPE_ERROR = 481;
 
     /**
      * @return the _result
