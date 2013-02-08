@@ -42,45 +42,45 @@ public class FrontServlet extends HttpServlet {
         Map<String,String> router = new HashMap<String, String>();
         
         String pathInfo = request.getPathInfo();
-        if("/".equals(pathInfo)) {
-            forwardJsf("index", request, response); // Dev
-            return;
-        }
+//        if("/".equals(pathInfo)) {
+//            forwardJsf("index", request, response); // Dev
+//            return;
+//        }
         
         List<String> parameterNamesList = new ArrayList<String>();
         
-        Pattern urlPattern = Pattern.compile("([a-zA-Z]+)");
+        Pattern urlPattern = Pattern.compile("([a-zA-Z-]+)");
         parameterNamesList.add("controller");
         parameterNamesList.add("action");
         
         Matcher urlMatcher = urlPattern.matcher(pathInfo);
         urlMatcher.matches();
-        if(urlMatcher.find()) {
-            int supportedParametersCount =
-                urlMatcher.groupCount() < parameterNamesList.size()?
-                    urlMatcher.groupCount()
-                    :parameterNamesList.size();
-
-            for(int index = 0;index < supportedParametersCount; ++index) {
-                String parameterValue = urlMatcher.group(index);
-                String parameterName = parameterNamesList.get(index);
-                router.put(parameterName, parameterValue);
-            }
+        
+        int supportedParametersCount = parameterNamesList.size();
+        int index = 0;
+        while(urlMatcher.find() && index < supportedParametersCount) {
+            String parameterValue = urlMatcher.group(index);
+            String parameterName = parameterNamesList.get(index);
+            router.put(parameterName, parameterValue);
+            ++index;
         }
         
-        MvcController controller;
         String controllerName = router.get("controller");
+        String actionName = router.get("action");
+        // Defaults
+        if(controllerName == null || controllerName.isEmpty()) controllerName = "test";
+        if(actionName == null || actionName.isEmpty()) actionName = "index";
+        
+        MvcController controller;
         controllerName = controllerName.toUpperCase().charAt(0) + controllerName.toLowerCase().substring(1);
         controllerName = "web.controller."+controllerName+"Controller";
-        String actionName = router.get("action");
-        if(actionName == null || actionName.isEmpty()) actionName = "index";
         // TODO Set defaults if not found
         ActionResult actionResult = null;
         try {
                 controller = (MvcController)(Class.forName(controllerName).newInstance());
                 actionResult = controller.call(actionName, request, response);
         } catch (ClassNotFoundException e) {
-                actionResult = new ActionResult("404");
+            actionResult = new ActionResult("404 Not Found (controller): "+actionName, ActionResult.TYPE_STRING + ActionResult.HTTP_404);
         } catch (Exception e) {
                 e.printStackTrace();
                 actionResult = new ActionResult(e.getMessage());

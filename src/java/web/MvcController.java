@@ -21,7 +21,7 @@ public abstract class MvcController {
                     actionResult = (ActionResult)actionMethod.invoke(this, parameters);
             }
             catch (NoSuchMethodException e) {
-                return new ActionResult("404 Not Found: "+actionName, ActionResult.TYPE_STRING + ActionResult.HTTP_404);
+                return new ActionResult("404 Not Found (action): "+actionName, ActionResult.TYPE_STRING + ActionResult.HTTP_404);
             }
             catch (Exception e) {
                     e.printStackTrace();
