@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:mvc="mvc.facelets">
+    
+    <fieldset>
+        <legend>Add</legend>
+        <mvc:form action="/catalogue/add" method="post" class="form form-horizontal">
+            <div class="control-group">
+                <label for="name" class="control-label">Name</label>
+                <div class="controls">
+                    <input autocomplete="off" type="text" placeholder="Name" id="name" name="name" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="description" class="control-label">Description</label>
+                <div class="controls">
+                    <input autocomplete="off" type="text" placeholder="Description" id="description" name="description" />
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </mvc:form>
+    </fieldset>
+</ui:component>

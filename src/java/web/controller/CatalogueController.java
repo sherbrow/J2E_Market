@@ -23,4 +23,17 @@ public class CatalogueController extends MvcController {
         return actionResult;
     }
     
+    public ActionResult add() {
+        ActionResult actionResult = new ActionResult("catalogue/add");
+        return actionResult;
+    }
+    public ActionResult post_add() {
+        HashMap<String, Object> viewBag = new HashMap<String, Object>();
+        
+        viewBag.put("message", "Catalogue Controller post action index!");
+        
+        ActionResult actionResult = new ActionResult("debug", viewBag);
+        return actionResult;
+    }
+    
 }
