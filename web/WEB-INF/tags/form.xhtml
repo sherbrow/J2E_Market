@@ -7,7 +7,9 @@
       >
     <h:body>
        <ui:composition>
-           <a href="#{request.contextPath}#{href}" class="#{class}" style="#{style}"><ui:insert />#{text}</a>
+<form action="#{request.contextPath}#{action}" class="#{class}" style="#{style}" method="#{method}" id="#{id}">
+    <ui:insert />
+</form>
        </ui:composition>
     </h:body>
 </html>
