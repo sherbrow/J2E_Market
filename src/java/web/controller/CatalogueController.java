@@ -5,6 +5,7 @@
 package web.controller;
 
 import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
 import web.ActionResult;
 import web.MvcController;
 
@@ -29,6 +30,7 @@ public class CatalogueController extends MvcController {
     }
     public ActionResult post_add() {
         HashMap<String, Object> viewBag = new HashMap<String, Object>();
+        HttpServletRequest request = getRequest();
         
         viewBag.put("message", "Catalogue Controller post action index!");
         

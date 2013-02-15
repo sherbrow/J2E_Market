@@ -13,9 +13,20 @@ import javax.servlet.http.HttpServletResponse;
  * @author Sherbrow
  */
 public abstract class MvcController {
+
+    
+        private HttpServletRequest _request;
+        private HttpServletResponse _response;
     
 	public ActionResult call(String actionName,HttpServletRequest request, HttpServletResponse response, Object... parameters) {
             ActionResult actionResult = null;
+            /** 
+             * This might not be really stateless (could cause concurrent access problems)
+             * alternative would to pass that as parameters to the action call
+             */
+            setRequest(request);
+            setResponse(response);
+            
             try{
                     String httpMethod = request.getMethod();
                     Method actionMethod;
@@ -39,4 +50,20 @@ public abstract class MvcController {
 
             return actionResult;
 	}
+        
+        protected HttpServletRequest getRequest() {
+            return _request;
+        }
+
+        protected void setRequest(HttpServletRequest _request) {
+            this._request = _request;
+        }
+
+        protected HttpServletResponse getResponse() {
+            return _response;
+        }
+
+        protected void setResponse(HttpServletResponse _response) {
+            this._response = _response;
+        }
 }
