@@ -17,7 +17,14 @@ public abstract class MvcController {
 	public ActionResult call(String actionName,HttpServletRequest request, HttpServletResponse response, Object... parameters) {
             ActionResult actionResult = null;
             try{
-                    Method actionMethod = this.getClass().getDeclaredMethod(actionName);
+                    String httpMethod = request.getMethod();
+                    Method actionMethod;
+                    try{
+                        actionMethod = this.getClass().getDeclaredMethod(httpMethod.toLowerCase()+"_"+actionName);
+                    }
+                    catch(NoSuchMethodException e) {
+                        actionMethod = this.getClass().getDeclaredMethod(actionName);
+                    }
                     actionResult = (ActionResult)actionMethod.invoke(this, parameters);
             }
             catch (NoSuchMethodException e) {
