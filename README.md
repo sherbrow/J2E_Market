@@ -5,9 +5,9 @@ Small project built as testing project for a J2E course
 
 # Developer Guide
 
-Just browse the code a bit, especially the `web` namespace.
+Just browse the code a bit, especially the [`web`](src/java/web) namespace.
 
-You could find a few tricks by browsing the JSF files too ([`/web/jsf/`](src/java/web)).
+You could find a few tricks by browsing the JSF files too ([`/web/jsf/`](web/jsf)).
 
 # Improvements
 
