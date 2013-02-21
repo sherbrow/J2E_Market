@@ -4,7 +4,12 @@
  */
 package web;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Method;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +22,8 @@ public abstract class MvcController {
     
         private HttpServletRequest _request;
         private HttpServletResponse _response;
+        private EntityManagerFactory _emf;
+        private EntityManager _em;
     
 	public ActionResult call(String actionName,HttpServletRequest request, HttpServletResponse response, Object... parameters) {
             ActionResult actionResult = null;
@@ -43,13 +50,31 @@ public abstract class MvcController {
             }
             catch (Exception e) {
                     e.printStackTrace();
+                    // Don't look at me : http://stackoverflow.com/a/1149721/1478467
+                    StringWriter sw = new StringWriter();
+                    e.printStackTrace(new PrintWriter(sw));
+                    actionResult = new ActionResult("500 Server error: "+sw.toString(), ActionResult.TYPE_STRING + ActionResult.HTTP_500);
                     actionResult.setError(e);
-                    actionResult.addType(ActionResult.TYPE_ERROR);
                     return actionResult;
             }
 
             return actionResult;
 	}
+
+        protected EntityManager createEntityManager() {
+            if(_em != null) return _em;
+            _emf = Persistence.createEntityManagerFactory("J2E_MarketPU");
+            _em = _emf.createEntityManager();
+            
+            return _em;
+        }
+        protected void closeEntityManager() {
+            if(_em == null) return;
+            _em.close();
+            _emf.close();
+            _em = null;
+            _emf = null;
+        }
         
         protected HttpServletRequest getRequest() {
             return _request;
