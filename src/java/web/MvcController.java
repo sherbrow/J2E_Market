@@ -66,4 +66,11 @@ public abstract class MvcController {
         protected void setResponse(HttpServletResponse _response) {
             this._response = _response;
         }
+        
+        protected String getParameter(String name) {
+            return _request.getParameter(name);
+        }
+        protected String[] getParameterValues(String name) {
+            return _request.getParameterValues(name);
+        }
 }
