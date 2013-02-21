@@ -7,17 +7,23 @@
     
     <fieldset>
         <legend>Add</legend>
+        
+        <ui:fragment rendered="#{requestScope.viewBag.error != null}">
+            <p class="alert alert-error">
+                <h:outputLabel value="#{requestScope.viewBag.error}" />
+            </p>
+        </ui:fragment>
         <mvc:form action="/catalogue/add" method="post" class="form form-horizontal">
             <div class="control-group">
                 <label for="name" class="control-label">Name</label>
                 <div class="controls">
-                    <input autocomplete="off" type="text" placeholder="Name" id="name" name="name" />
+                    <input autocomplete="off" type="text" placeholder="Name" id="name" name="name" value="#{requestScope.viewBag.name}" />
                 </div>
             </div>
             <div class="control-group">
                 <label for="description" class="control-label">Description</label>
                 <div class="controls">
-                    <input autocomplete="off" type="text" placeholder="Description" id="description" name="description" />
+                    <input autocomplete="off" type="text" placeholder="Description" id="description" name="description" value="#{requestScope.viewBag.description}" />
                 </div>
             </div>
             <div class="form-actions">

@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:mvc="mvc.facelets">
     <head>
     </head>
@@ -17,7 +18,25 @@
             </ui:define>
             
             <ui:define name="main">
-                Plop
+                <p>
+                    <mvc:a href="/catalogue/add" class="btn btn-primary"><mvc:icon name="plus" color="white" /> Add Catalogue</mvc:a>
+                </p>
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="#{requestScope.viewBag.catalogues}" var="item">
+                            <tr>
+                                <td><h:outputText value="#{item.name}"/></td>
+                                <td><h:outputText value="#{item.description}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </ui:define>
         </ui:composition>
 

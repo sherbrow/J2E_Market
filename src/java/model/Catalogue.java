@@ -22,6 +22,13 @@ public class Catalogue implements Serializable {
     
     private String name;
     private String description;
+    
+    public boolean isValid() {
+        if(name == null || name.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 
     public String getDescription() {
         return description;
