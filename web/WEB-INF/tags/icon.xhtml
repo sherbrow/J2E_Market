@@ -7,7 +7,12 @@
       >
     <h:body>
        <ui:composition>
-           <a href="#{request.contextPath}#{href}" class="#{class}" style="#{style}"><ui:insert /></a>
+          <ui:fragment rendered="#{color != null}">
+            <i class="icon-#{name} icon-#{color}" ><ui:insert /></i>
+          </ui:fragment>
+          <ui:fragment rendered="#{color == null}">
+            <i class="icon-#{name}" ><ui:insert /></i>
+          </ui:fragment>
        </ui:composition>
     </h:body>
 </html>

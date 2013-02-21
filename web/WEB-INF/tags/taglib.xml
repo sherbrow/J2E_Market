@@ -12,4 +12,8 @@
         <tag-name>form</tag-name>
         <source>form.xhtml</source>
     </tag>
+    <tag>
+        <tag-name>icon</tag-name>
+        <source>icon.xhtml</source>
+    </tag>
 </facelet-taglib>
