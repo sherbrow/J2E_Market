@@ -125,6 +125,10 @@ public class FrontServlet extends HttpServlet {
                 String jsfPageName = (String)actionResult.getResult();
                 forwardJsf(jsfPageName, request, response);
                 break;
+            case ActionResult.TYPE_REDIRECT:
+                String url = (String)actionResult.getResult();
+                response.sendRedirect(request.getContextPath()+"/"+url);
+                break;
         }
     }
 

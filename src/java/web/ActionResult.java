@@ -78,6 +78,7 @@ public class ActionResult {
     public static final int  TYPE_JSP = 1;
     public static final int TYPE_STRING = 2;
     public static final int TYPE_JSF = 4;
+    public static final int TYPE_REDIRECT = 8;
     public static final int MASK_RENDERTYPE = 31;
     public static final int HTTP_401 = 32;
     public static final int HTTP_403 = 64;
