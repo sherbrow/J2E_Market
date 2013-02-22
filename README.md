@@ -3,6 +3,8 @@ J2E_Market
 
 Small project built as testing project for a J2E course
 
+[Project home](https://github.com/sherbrow/J2E_Market)
+
 # Developer Guide
 
 Just browse the code a bit, especially the [`web`](src/java/web) namespace.
